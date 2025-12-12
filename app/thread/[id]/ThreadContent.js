@@ -123,9 +123,6 @@ export default function ThreadContent({ forumUser, articleData, articleComments,
                 <div className="py-10 lg:w-1/3 w-full md:pl-6">
                     <h3 className="mb-5 text-gray-900 font-medium text-xl">Related articles</h3>
                     <Threads data={recentArticles} limit={5} />
-                    <hr className="border-t border-gray-300 my-8" />
-                    <h3 className="mb-5 text-gray-900 font-medium text-xl">Recent comments</h3>
-                    <Posts data={recentComments} limit={5} />
                 </div>
             </div>
         </div>

@@ -28,9 +28,9 @@ export default function Search({ onSearchResults }) {
     };
 
     return (
-        <div className="w-full md:w-1/2 pb-3 md:pb-0 md:pr-3 md:border-r border-gray-300">
+        <div className="w-full md:w-1/2 pb-3 md:pb-0 md:pr-3">
             <h3 className="text-xl text-gray-900 mb-2">
-                Search for threads
+                Search for articles
             </h3>
             <form onSubmit={handleSearch}>
                 <div className="flex flex-col">
@@ -67,42 +67,8 @@ export default function Search({ onSearchResults }) {
                         />
                     </div>
                 </div>
-                <div className="flex flex-col md:flex-row md:items-center">
-                    <div className="w-full md:w-1/2">
-                        <div className="relative w-full z-10">
-                            <div className="absolute z-0 inset-0 m-auto mr-2 xl:mr-4 z-0 w-5 h-5">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="icon cursor-pointer icon-tabler icon-tabler-chevron-down"
-                                    width={20}
-                                    height={20}
-                                    viewBox="0 0 24 24"
-                                    strokeWidth="1.5"
-                                    stroke="#a0aec0"
-                                    fill="none"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                >
-                                    <path stroke="none" d="M0 0h24v24H0z" />
-                                    <polyline points="6 9 12 15 18 9" />
-                                </svg>
-                            </div>
-                            <select
-                                aria-label="Selected tab"
-                                className="relative z-10 cursor-pointer focus:outline-none focus:border-gray-800 focus:shadow-outline-gray text-sm form-select block w-full py-2 px-2 xl:px-3 border border-gray-300 rounded text-gray-600 appearance-none bg-transparent"
-                                value={searchType}
-                                onChange={(e) => setSearchType(e.target.value)}
-                            >
-                                <option key="threads" value="Threads" className="text-sm text-gray-600">
-                                    Threads
-                                </option>
-                                <option key="posts" value="Posts" className="text-sm text-gray-600">
-                                    Posts
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                    <div className="w-full md:w-1/2 md:flex justify-end">
+                <div className="flex flex-col md:flex-row">
+                    <div className="w-full md:w-full md:flex">
                         <button
                             className="bg-gray-800 text-sm text-white rounded hover:bg-gray-600 transition duration-150 ease-in-out py-2 px-6 sm:mt-0 mt-4"
                             type="submit"

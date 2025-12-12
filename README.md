@@ -82,7 +82,7 @@ This ensures API keys are never exposed to the frontend.
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/) from the creators of Next.js.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fforu-ms%2Fnextjs-starter&env=FORU_MS_API_KEY,FORU_MS_API_URL&envDescription=API%20Key%20and%20URL%20needed%20for%20the%20application.&envLink=https%3A%2F%2Fforu.ms&demo-title=Knowledge%20Base&demo-description=A%20functional%20knowledge%20base%20example%20using%20Next.js.&demo-url=https%3A%2F%2Fknowledge-base-kb.vercel.app%2F)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fforu-ms%2Fnextjs-starter&env=FORU_MS_API_KEY,FORU_MS_API_URL&envDescription=API%20Key%20and%20URL%20needed%20for%20the%20application.&envLink=https%3A%2F%2Fforu.ms&demo-title=Knowledge%20Base&demo-description=A%20functional%20knowledge%20base%20example%20using%20Next.js.&demo-url=https%3A%2F%2Fknowledge-base-kb.vercel.app%2F&demo-image=https%3A%2F%2Fknowledge-base-kb.vercel.app%2Fdemo.png)
 
 ## Learn More
 

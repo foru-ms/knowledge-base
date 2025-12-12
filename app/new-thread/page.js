@@ -17,6 +17,11 @@ export default async function NewThreadPage({ searchParams }) {
         redirect('/login');
     }
 
+    // Only allow admins to access the create article page
+    if (forumUser?.extendedData?.role !== 'admin') {
+        redirect('/');
+    }
+
     const initialTitle = searchParams?.title || '';
 
     return (
