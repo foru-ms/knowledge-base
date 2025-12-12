@@ -1,4 +1,5 @@
-import { redirect, Suspense } from 'next/navigation';
+import { redirect } from 'next/navigation';
+import { Suspense } from 'react';
 import { getCurrentUser } from '@/lib/auth';
 import Sidebar from '@/components/Sidebar/index';
 import NewThreadForm from './NewThreadForm';
