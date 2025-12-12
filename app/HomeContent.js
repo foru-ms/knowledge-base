@@ -15,7 +15,7 @@ export default function HomeContent({ forumUser, initialThreads, posts, currentP
             <div className="lg:flex flex-wrap">
                 <div className="py-10 lg:w-2/3 w-full md:pr-6 md:border-r border-gray-300">
                     <div>
-                        <Link href="/"><h1 className="text-3xl text-gray-900 font-bold mb-3">Forum</h1></Link>
+                        <Link href="/"><h1 className="text-3xl text-gray-900 font-bold mb-3">Knowledge Base (KB)</h1></Link>
                         {forumUser && (<p className="text-gray-600 text-sm">Welcome, {forumUser.username}</p>)}
                         <div className="flex flex-col mt-10 md:flex-row md:items-center">
                             <Search onSearchResults={setThreadsData} />

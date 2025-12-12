@@ -10,11 +10,11 @@ export async function generateMetadata({ params }) {
     try {
         const { data } = await forumsApi.threads.fetchById(id);
         return {
-            title: `${data?.title || 'Thread'} - Demo Foru.ms`,
+            title: `${data?.title || 'Thread'} - Knowledge Base (KB)`,
         };
     } catch (error) {
         return {
-            title: 'Thread - Demo Foru.ms',
+            title: 'Thread - Knowledge Base (KB)',
         };
     }
 }

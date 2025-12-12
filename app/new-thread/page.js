@@ -5,7 +5,7 @@ import Sidebar from '@/components/Sidebar/index';
 import NewThreadForm from './NewThreadForm';
 
 export const metadata = {
-    title: 'New Thread - Demo Foru.ms',
+    title: 'New Thread - Knowledge Base (KB)',
     description: 'Create a new forum thread',
 };
 

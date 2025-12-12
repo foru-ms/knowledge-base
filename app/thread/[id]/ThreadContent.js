@@ -79,7 +79,7 @@ export default function ThreadContent({ forumUser, threadData, threadPosts, rece
                                     <polyline points="15 6 9 12 15 18" />
                                 </svg>
                             </div>
-                            <h4 className="text-xl text-gray-900">Support Forums</h4>
+                            <h4 className="text-xl text-gray-900">Knowledge Base (KB)</h4>
                         </div>
                     </Link>
                     <h1 className="my-6 text-4xl font-medium text-gray-900">{threadData?.title}</h1>

@@ -2,7 +2,7 @@ import { Toaster } from 'react-hot-toast';
 import "@/styles/globals.css";
 
 export const metadata = {
-  title: 'Demo Foru.ms',
+  title: 'Knowledge Base (KB)',
   description: 'A Next.js forum application',
 };
 

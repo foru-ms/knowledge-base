@@ -4,7 +4,7 @@ import { forumsApi } from '@/lib/forumsApi';
 import HomeContent from './HomeContent';
 
 export const metadata = {
-    title: 'Demo Foru.ms',
+    title: 'Knowledge Base (KB)',
     description: 'A Next.js forum application',
 };
 
