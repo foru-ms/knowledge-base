@@ -1,9 +1,15 @@
-import { Html, Head, Main, NextScript } from "next/document";
+import { Toaster } from 'react-hot-toast';
+import "@/styles/globals.css";
 
-export default function Document() {
+export const metadata = {
+  title: 'Demo Foru.ms',
+  description: 'A Next.js forum application',
+};
+
+export default function RootLayout({ children }) {
   return (
-    <Html lang="en">
-      <Head />
+    <html lang="en">
+      <head />
       <body>
         <a
           href="#main-content"
@@ -11,9 +17,9 @@ export default function Document() {
         >
           Skip to main content
         </a>
-        <Main />
-        <NextScript />
+        <Toaster />
+        {children}
       </body>
-    </Html>
+    </html>
   );
 }

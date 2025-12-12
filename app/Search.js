@@ -1,4 +1,6 @@
-import { useState, useCallback } from 'react';
+'use client';
+
+import { useState } from 'react';
 import { clientApi } from '@/lib/clientApi';
 
 export default function Search({ onSearchResults }) {

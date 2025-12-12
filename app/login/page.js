@@ -1,18 +1,27 @@
-import Meta from "@/components/Meta";
+'use client';
+
 import Sidebar from "@/components/Sidebar";
 import Link from "next/link";
-import { forumsApi } from '@/lib/forumsApi';
 import { clientApi } from '@/lib/clientApi';
-import { useState } from "react";
-import toast, { Toaster } from 'react-hot-toast';
+import { useState, useEffect } from "react";
+import toast from 'react-hot-toast';
 import Cookies from 'js-cookie';
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
-const Login = ({ forumUser }) => {
+export default function LoginPage() {
     const [submittingState, setSubmittingState] = useState(false);
     const [resetSubmittingState, setResetSubmittingState] = useState(false);
+    const [forumUser, setForumUser] = useState(null);
 
     const router = useRouter();
+
+    // Check if user is already logged in
+    useEffect(() => {
+        const token = Cookies.get('forumUserToken');
+        if (token) {
+            router.push('/');
+        }
+    }, [router]);
 
     const loginCommon = async (login, password) => {
         try {
@@ -111,7 +120,7 @@ const Login = ({ forumUser }) => {
     <button
       onClick={() => {
         navigator.clipboard.writeText(data.resetToken);
-        toast.dismiss(t.id); // Optionally dismiss the toast after copying
+        toast.dismiss(t.id);
         toast.success('Token copied to clipboard!');
         router.push(`/reset-password?token=${data.resetToken}`);
       }}
@@ -135,85 +144,83 @@ const Login = ({ forumUser }) => {
     };
 
     return (
-        <>
-            <Meta title="Login" />
-            <div className="flex flex-row w-full">
-                <Sidebar data={forumUser} />
-                <div className="flex flex-col lg:w-full items-center justify-center mx-auto md:h-screen lg:py-0">
-                    <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-                        <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                            <h3 className="mb-5 text-gray-900 font-medium text-xl">Login</h3>
-                            <form className="space-y-4 md:space-y-6" action="POST" onSubmit={handleLogin}>
-                                <div>
-                                    <label htmlFor="username-email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                        Username/Email
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="login"
-                                        id="username-email"
-                                        autoComplete="username"
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="username/name@company.com"
-                                        required
-                                    />
-                                </div>
-                                <div>
-                                    <label htmlFor="login-password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                        Password
-                                    </label>
-                                    <input
-                                        type="password"
-                                        name="password"
-                                        id="login-password"
-                                        autoComplete="current-password"
-                                        placeholder="••••••••"
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        required
-                                    />
-                                </div>
-                                <button
-                                    type="submit"
-                                    className="bg-gray-800 text-sm text-white rounded hover:bg-gray-600 transition duration-150 ease-in-out py-2 px-6 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-gray-800"
-                                    disabled={submittingState}
-                                    aria-busy={submittingState}
-                                >
-                                    {submittingState ? 'Logging in...' : 'Login'}
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                    <div className="w-full bg-white rounded-lg shadow dark:border md:mt-4 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-                        <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                            <h3 className="mb-5 text-gray-900 font-medium text-xl">Forgot password?</h3>
-                            <form className="space-y-4 md:space-y-6" action="POST" onSubmit={handleResetPassword}>
-                                <div>
-                                    <label htmlFor="reset-email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                        Email
-                                    </label>
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        id="reset-email"
-                                        autoComplete="email"
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="name@company.com"
-                                        required
-                                    />
-                                </div>
-                                <button
-                                    type="submit"
-                                    className="bg-gray-800 text-sm text-white rounded hover:bg-gray-600 transition duration-150 ease-in-out py-2 px-6 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-gray-800"
-                                    disabled={resetSubmittingState}
-                                    aria-busy={resetSubmittingState}
-                                >
-                                    {resetSubmittingState ? 'Processing...' : 'Get reset token'}
-                                </button>
-                            </form>
-                        </div>
+        <div className="flex flex-row w-full">
+            <Sidebar data={forumUser} />
+            <div className="flex flex-col lg:w-full items-center justify-center mx-auto md:h-screen lg:py-0">
+                <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+                    <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+                        <h3 className="mb-5 text-gray-900 font-medium text-xl">Login</h3>
+                        <form className="space-y-4 md:space-y-6" action="POST" onSubmit={handleLogin}>
+                            <div>
+                                <label htmlFor="username-email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    Username/Email
+                                </label>
+                                <input
+                                    type="text"
+                                    name="login"
+                                    id="username-email"
+                                    autoComplete="username"
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="username/name@company.com"
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="login-password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    Password
+                                </label>
+                                <input
+                                    type="password"
+                                    name="password"
+                                    id="login-password"
+                                    autoComplete="current-password"
+                                    placeholder="••••••••"
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    required
+                                />
+                            </div>
+                            <button
+                                type="submit"
+                                className="bg-gray-800 text-sm text-white rounded hover:bg-gray-600 transition duration-150 ease-in-out py-2 px-6 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-gray-800"
+                                disabled={submittingState}
+                                aria-busy={submittingState}
+                            >
+                                {submittingState ? 'Logging in...' : 'Login'}
+                            </button>
+                        </form>
                     </div>
                 </div>
-                <div className="flex flex-col lg:w-full items-center justify-center mx-auto md:h-screen lg:py-0">
+                <div className="w-full bg-white rounded-lg shadow dark:border md:mt-4 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+                    <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+                        <h3 className="mb-5 text-gray-900 font-medium text-xl">Forgot password?</h3>
+                        <form className="space-y-4 md:space-y-6" action="POST" onSubmit={handleResetPassword}>
+                            <div>
+                                <label htmlFor="reset-email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    Email
+                                </label>
+                                <input
+                                    type="email"
+                                    name="email"
+                                    id="reset-email"
+                                    autoComplete="email"
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="name@company.com"
+                                    required
+                                />
+                            </div>
+                            <button
+                                type="submit"
+                                className="bg-gray-800 text-sm text-white rounded hover:bg-gray-600 transition duration-150 ease-in-out py-2 px-6 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-gray-800"
+                                disabled={resetSubmittingState}
+                                aria-busy={resetSubmittingState}
+                            >
+                                {resetSubmittingState ? 'Processing...' : 'Get reset token'}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div className="flex flex-col lg:w-full items-center justify-center mx-auto md:h-screen lg:py-0">
     <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
       <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
         <h3 className="mb-5 text-gray-900 font-medium text-xl">
@@ -308,39 +315,6 @@ const Login = ({ forumUser }) => {
       </div>
       </div>
       </div>
-            </div>
-        </>
+        </div>
     );
-};
-
-export async function getServerSideProps(context) {
-    const { forumUserToken } = context.req.cookies;
-    let forumUser = null;
-
-    // Fetch current user if token exists
-    if (forumUserToken) {
-        try {
-            const { data } = await forumsApi.auth.fetchCurrentUser(forumUserToken);
-            if (data?.id) {
-                // User is already logged in, redirect to home
-                return {
-                    redirect: {
-                        destination: '/',
-                        permanent: false,
-                    },
-                };
-            }
-        } catch (error) {
-            // Token invalid - continue to login page
-            console.error('Error fetching user:', error);
-        }
-    }
-
-    return {
-        props: {
-            forumUser,
-        }
-    };
 }
-
-export default Login;
