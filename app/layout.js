@@ -2,8 +2,8 @@ import { Toaster } from 'react-hot-toast';
 import "@/styles/globals.css";
 
 export const metadata = {
-  title: 'Knowledge Base (KB)',
-  description: 'A Next.js forum application',
+  title: 'Knowledge Base',
+  description: 'A comprehensive knowledge base for documentation and articles',
 };
 
 export default function RootLayout({ children }) {

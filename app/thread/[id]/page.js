@@ -8,13 +8,13 @@ export async function generateMetadata({ params }) {
     const { id } = params;
     
     try {
-        const { data } = await forumsApi.threads.fetchById(id);
+        const { data } = await forumsApi.articles.fetchById(id);
         return {
-            title: `${data?.title || 'Thread'} - Knowledge Base (KB)`,
+            title: `${data?.title || 'Article'} - Knowledge Base`,
         };
     } catch (error) {
         return {
-            title: 'Thread - Knowledge Base (KB)',
+            title: 'Article - Knowledge Base',
         };
     }
 }
@@ -23,33 +23,33 @@ export default async function ThreadPage({ params }) {
     const { id } = params;
     const forumUser = await getCurrentUser();
     
-    // Fetch thread data
-    let threadData = null;
+    // Fetch article data
+    let articleData = null;
     try {
-        const { data } = await forumsApi.threads.fetchById(id);
-        threadData = data;
+        const { data } = await forumsApi.articles.fetchById(id);
+        articleData = data;
     } catch (error) {
-        console.error('Error fetching thread:', error);
+        console.error('Error fetching article:', error);
         notFound();
     }
     
     // Fetch all data in parallel
-    let threadPosts = [];
-    let recentThreads = [];
-    let recentPosts = [];
+    let articleComments = [];
+    let recentArticles = [];
+    let recentComments = [];
 
     try {
-        const [threadPostsResponse, recentThreadsResponse, recentPostsResponse] = await Promise.all([
-            forumsApi.threads.fetchPosts(id),
-            forumsApi.threads.fetchAll(),
-            forumsApi.posts.fetchAll(),
+        const [articleCommentsResponse, recentArticlesResponse, recentCommentsResponse] = await Promise.all([
+            forumsApi.articles.fetchComments(id),
+            forumsApi.articles.fetchAll(),
+            forumsApi.comments.fetchAll(),
         ]);
 
-        threadPosts = threadPostsResponse.data?.posts || [];
-        recentThreads = recentThreadsResponse.data?.threads || [];
-        recentPosts = recentPostsResponse.data?.posts || [];
+        articleComments = articleCommentsResponse.data?.posts || [];
+        recentArticles = recentArticlesResponse.data?.threads || [];
+        recentComments = recentCommentsResponse.data?.posts || [];
     } catch (error) {
-        console.error('Error fetching thread data:', error);
+        console.error('Error fetching article data:', error);
     }
 
     return (
@@ -58,11 +58,11 @@ export default async function ThreadPage({ params }) {
             <div className="w-full">
                 <ThreadContent 
                     forumUser={forumUser}
-                    threadData={threadData}
-                    threadPosts={threadPosts}
-                    recentThreads={recentThreads}
-                    recentPosts={recentPosts}
-                    threadId={id}
+                    articleData={articleData}
+                    articleComments={articleComments}
+                    recentArticles={recentArticles}
+                    recentComments={recentComments}
+                    articleId={id}
                 />
             </div>
         </div>

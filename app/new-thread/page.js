@@ -5,8 +5,8 @@ import Sidebar from '@/components/Sidebar/index';
 import NewThreadForm from './NewThreadForm';
 
 export const metadata = {
-    title: 'New Thread - Knowledge Base (KB)',
-    description: 'Create a new forum thread',
+    title: 'Create Article - Knowledge Base',
+    description: 'Create a new knowledge base article',
 };
 
 export default async function NewThreadPage({ searchParams }) {

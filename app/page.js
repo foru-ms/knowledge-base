@@ -4,28 +4,28 @@ import { forumsApi } from '@/lib/forumsApi';
 import HomeContent from './HomeContent';
 
 export const metadata = {
-    title: 'Knowledge Base (KB)',
-    description: 'A Next.js forum application',
+    title: 'Knowledge Base',
+    description: 'A comprehensive knowledge base for documentation and articles',
 };
 
 export default async function HomePage({ searchParams }) {
     const page = searchParams?.page || 1;
     const forumUser = await getCurrentUser();
 
-    // Fetch threads and posts
-    let threads = [];
-    let posts = [];
-    let nextThreadCursor = null;
+    // Fetch articles and comments
+    let articles = [];
+    let comments = [];
+    let nextArticleCursor = null;
 
     try {
-        const [threadsResponse, postsResponse] = await Promise.all([
-            forumsApi.threads.fetchAll(page),
-            forumsApi.posts.fetchAll(),
+        const [articlesResponse, commentsResponse] = await Promise.all([
+            forumsApi.articles.fetchAll(page),
+            forumsApi.comments.fetchAll(),
         ]);
 
-        threads = threadsResponse.data?.threads || [];
-        posts = postsResponse.data?.posts || [];
-        nextThreadCursor = threadsResponse.data?.nextThreadCursor || null;
+        articles = articlesResponse.data?.threads || [];
+        comments = commentsResponse.data?.posts || [];
+        nextArticleCursor = articlesResponse.data?.nextThreadCursor || null;
     } catch (error) {
         console.error('Error fetching data:', error);
     }
@@ -36,10 +36,10 @@ export default async function HomePage({ searchParams }) {
             <div className="w-full" id="main-content" role="main">
                 <HomeContent 
                     forumUser={forumUser} 
-                    initialThreads={threads}
-                    posts={posts}
+                    initialArticles={articles}
+                    comments={comments}
                     currentPage={parseInt(page, 10)}
-                    nextThreadCursor={nextThreadCursor}
+                    nextArticleCursor={nextArticleCursor}
                 />
             </div>
         </div>
