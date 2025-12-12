@@ -41,7 +41,6 @@ export default function ThreadContent({ forumUser, threadData, threadPosts, rece
                 if (data?.id) {
                     toast.success('Post successfully created!');
                     router.refresh();
-                    setFormData({ body: '' });
                 } else if (data?.message) {
                     toast.error(data.message);
                 }

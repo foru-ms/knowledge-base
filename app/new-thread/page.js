@@ -35,9 +35,10 @@ function NewThreadForm() {
             }));
         }
 
-        // Fetch user data (simplified - in production you'd validate the token)
-        // For now, we'll just store a placeholder
-        setForumUser({ id: 'user-from-token' });
+        // In a production app, you should validate the token and fetch user data
+        // For this forum app, we'll extract the user ID from the JWT token or make an API call
+        // For now, using a temporary approach - ideally call an API to validate token and get user
+        setForumUser({ id: token }); // Using token as placeholder - the API will validate it
     }, [searchParams, router]);
 
     const onChange = (e) => {
