@@ -1,4 +1,3 @@
-import { PagesTopLoader } from 'nextjs-toploader/pages';
 import { Toaster } from 'react-hot-toast';
 import "@/styles/globals.css";
 
@@ -18,7 +17,6 @@ export default function RootLayout({ children }) {
         >
           Skip to main content
         </a>
-        <PagesTopLoader color="rgb(29 78 216)" />
         <Toaster />
         {children}
       </body>

@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Search from './Search';
-import Threads from '@/pages/threads';
-import Posts from '@/pages/posts';
+import Threads from '@/components/Threads';
+import Posts from '@/components/Posts';
 
 export default function HomeContent({ forumUser, initialThreads, posts, currentPage, nextThreadCursor }) {
     const [threadsData, setThreadsData] = useState(initialThreads || []);

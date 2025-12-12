@@ -5,8 +5,8 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 import { clientApi } from '@/lib/clientApi';
-import Threads from '@/pages/threads';
-import Posts from '@/pages/posts';
+import Threads from '@/components/Threads';
+import Posts from '@/components/Posts';
 
 export default function ThreadContent({ forumUser, threadData, threadPosts, recentThreads, recentPosts, threadId }) {
     const router = useRouter();
