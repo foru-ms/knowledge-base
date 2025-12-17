@@ -82,7 +82,7 @@ export function AuthDialog() {
     <Dialog open={isOpen} onOpenChange={closeAuthDialog}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>{showForgotPassword ? "Reset Password" : "Join the Knowledge Base"}</DialogTitle>
+          <DialogTitle>{showForgotPassword ? "Reset Password" : "Join the KB"}</DialogTitle>
           <DialogDescription>
             {showForgotPassword
               ? "Enter your email to receive password reset instructions"
