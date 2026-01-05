@@ -161,7 +161,7 @@ export function ArticleContent({ threadId }: { threadId: string }) {
               </div>
             )}
 
-            <div className="flex items-center gap-2 pt-4 border-t">
+            <div className="flex items-center gap-2 pt-4">
               <Button variant={hasLiked ? "default" : "outline"} size="sm" onClick={handleLike}>
                 <Heart className="h-4 w-4 mr-1" />
                 {likesCount}
