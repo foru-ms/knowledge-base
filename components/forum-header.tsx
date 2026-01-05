@@ -42,9 +42,6 @@ export function ForumHeader() {
           <Link href="/tags" className="text-muted-foreground hover:text-foreground transition-colors">
             Tags
           </Link>
-          <Link href="/users" className="text-muted-foreground hover:text-foreground transition-colors">
-            Members
-          </Link>
         </div>
 
         <div className="flex items-center gap-2 md:gap-3 ml-auto">

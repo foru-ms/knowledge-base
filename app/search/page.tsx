@@ -16,7 +16,7 @@ export default function SearchPage() {
   const searchParams = useSearchParams()
   const initialQuery = searchParams.get("q") || ""
   const [query, setQuery] = useState(initialQuery)
-  const [results, setResults] = useState<any>({ threads: [], posts: [], users: [], tags: [] })
+  const [results, setResults] = useState<any>({ threads: [], posts: [], tags: [] })
   const [isLoading, setIsLoading] = useState(false)
   const [activeTab, setActiveTab] = useState("all")
 
@@ -27,7 +27,7 @@ export default function SearchPage() {
       setIsLoading(true)
       try {
         const data = await ForumAPI.search({ q: query, limit: 20 })
-        setResults(data.results || { threads: [], posts: [], users: [], tags: [] })
+        setResults(data.results || { threads: [], posts: [], tags: [] })
       } catch (error) {
         console.error("Search failed:", error)
       } finally {
@@ -42,7 +42,6 @@ export default function SearchPage() {
   const totalResults =
     (results.threads?.length || 0) +
     (results.posts?.length || 0) +
-    (results.users?.length || 0) +
     (results.tags?.length || 0)
 
   return (
@@ -57,7 +56,7 @@ export default function SearchPage() {
               <Search className="absolute left-3 top-3 h-5 w-5 text-muted-foreground" />
               <Input
                 type="search"
-                placeholder="Search articles, comments, and users..."
+                placeholder="Search articles and comments..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 className="pl-10 text-lg h-12"
@@ -74,7 +73,7 @@ export default function SearchPage() {
             <Card>
               <CardContent className="py-12 text-center">
                 <Search className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
-                <p className="text-muted-foreground">Enter a search query to find articles, comments, and users</p>
+                <p className="text-muted-foreground">Enter a search query to find articles and comments</p>
               </CardContent>
             </Card>
           ) : totalResults === 0 ? (
@@ -94,7 +93,6 @@ export default function SearchPage() {
                   <TabsTrigger value="all">All ({totalResults})</TabsTrigger>
                   <TabsTrigger value="threads">Articles ({results.threads?.length || 0})</TabsTrigger>
                   <TabsTrigger value="posts">Posts ({results.posts?.length || 0})</TabsTrigger>
-                  <TabsTrigger value="users">Users ({results.users?.length || 0})</TabsTrigger>
                   <TabsTrigger value="tags">Tags ({results.tags?.length || 0})</TabsTrigger>
                 </TabsList>
 
@@ -105,30 +103,6 @@ export default function SearchPage() {
                       <div className="space-y-3">
                         {results.threads.map((thread: any) => (
                           <ArticleCard key={thread.id} thread={thread} />
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {results.users?.length > 0 && (
-                    <div>
-                      <h2 className="text-lg font-semibold mb-3">Users</h2>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        {results.users.map((user: any) => (
-                          <Link key={user.id} href={`/user/${user.id}`}>
-                            <Card className="hover:border-primary/50 transition-colors cursor-pointer">
-                              <CardContent className="py-4 flex items-center gap-3">
-                                <Avatar>
-                                  <AvatarImage src={user.image || "/placeholder.svg"} />
-                                  <AvatarFallback>{user.username[0].toUpperCase()}</AvatarFallback>
-                                </Avatar>
-                                <div>
-                                  <p className="font-semibold">{user.displayName || user.username}</p>
-                                  <p className="text-sm text-muted-foreground">@{user.username}</p>
-                                </div>
-                              </CardContent>
-                            </Card>
-                          </Link>
                         ))}
                       </div>
                     </div>
@@ -209,27 +183,6 @@ export default function SearchPage() {
                         <p>No posts found</p>
                       </div>
                     )}
-                  </div>
-                </TabsContent>
-
-                <TabsContent value="users" className="mt-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {results.users?.map((user: any) => (
-                      <Link key={user.id} href={`/user/${user.id}`}>
-                        <Card className="hover:border-primary/50 transition-colors cursor-pointer">
-                          <CardContent className="py-4 flex items-center gap-3">
-                            <Avatar>
-                              <AvatarImage src={user.image || "/placeholder.svg"} />
-                              <AvatarFallback>{user.username[0].toUpperCase()}</AvatarFallback>
-                            </Avatar>
-                            <div>
-                              <p className="font-semibold">{user.displayName || user.username}</p>
-                              <p className="text-sm text-muted-foreground">@{user.username}</p>
-                            </div>
-                          </CardContent>
-                        </Card>
-                      </Link>
-                    ))}
                   </div>
                 </TabsContent>
 

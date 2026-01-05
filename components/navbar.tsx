@@ -49,9 +49,6 @@ export function Navbar() {
               <Link href="/tags" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                 Tags
               </Link>
-              <Link href="/users" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                Members
-              </Link>
             </div>
           </div>
 
